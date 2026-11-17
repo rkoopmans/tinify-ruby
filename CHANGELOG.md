@@ -1,3 +1,8 @@
+## 2.0.0
+
+* Use the system CA certificate store to verify TLS connections instead of a bundled CA certificate chain.
+* Removed the bundled `lib/data/cacert.pem`, the `Tinify::Client::CA_BUNDLE` constant and the `update-cacert.sh` script.
+
 ## 1.9.0
 
 * Added `Tinify::Format` constants for the media types `convert` accepts, including JPEG XL (`image/jxl`).

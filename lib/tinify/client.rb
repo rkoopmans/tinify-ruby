@@ -10,8 +10,6 @@ module Tinify
 
     USER_AGENT = "Tinify/#{VERSION} Ruby/#{RUBY_VERSION}p#{RUBY_PATCHLEVEL} (#{defined?(RUBY_ENGINE) ? RUBY_ENGINE : "unknown"})".freeze
 
-    CA_BUNDLE = File.expand_path("../../data/cacert.pem", __FILE__).freeze
-
     def initialize(key, app_identifier = nil, proxy = nil)
       begin
         @client = HTTPClient.new(proxy)
@@ -25,8 +23,7 @@ module Tinify
       @client.force_basic_auth = true
       @client.set_auth("/", "api", key)
 
-      @client.ssl_config.clear_cert_store
-      @client.ssl_config.add_trust_ca(CA_BUNDLE)
+      @client.ssl_config.set_default_paths
     end
 
     def request(method, url, body = nil)
